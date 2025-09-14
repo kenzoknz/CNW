@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script>
+    function check(){
+        var messageDiv = document.getElementById("message");
+        
+        if (document.f1.username.value == "" || document.f1.password.value == ""){
+            messageDiv.innerHTML = "Vui lòng nhập đầy đủ thông tin";
+            messageDiv.style.color = "red";
+            messageDiv.style.display = "block";
+            return false;
+        }
+        
+        messageDiv.innerHTML = "Đăng nhập thành công!";
+        messageDiv.style.color = "green";
+        messageDiv.style.display = "block";
+        return true;
+    }
+</script>
+<body>
+    <form name="f1">
+        <table>
+            <caption>Login</caption>
+            <tr>
+                <td>Username:</td>
+                <td><input type="text" name="username"></td>
+            </tr>
+            <tr>
+                <td>Password:</td>
+                <td><input type="password" name="password"></td>
+            </tr>
+            <tr>
+                <td colspan="2" style="text-align: center;">
+                    <input type="" onClick="return check()" value="Login">
+                    <input type="reset" value="Reset">
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" style="text-align: center;">
+                    <div id="message" style="display: none; margin-top: 10px; font-weight: bold;"></div>
+                </td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>

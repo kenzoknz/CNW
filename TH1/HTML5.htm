@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Layout 3 khung bằng CSS Grid</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: grid;
+      /* 2 hàng: header cao 60px, phần còn lại chiếm chỗ */
+      grid-template-rows: 60px 1fr;
+      /* 2 cột: sidebar 200px, main auto */
+      grid-template-columns: 200px 1fr;
+      /* đặt tên vùng */
+      grid-template-areas:
+        "header header"
+        "sidebar main";
+    }
+    header {
+      grid-area: header;
+      background: #4CAF50;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      padding: 0 1rem;
+      font-size: 1.2rem;
+    }
+    nav {
+      grid-area: sidebar;
+      background: #f4f4f4;
+      padding: 1rem;
+    }
+    main {
+      grid-area: main;
+      background: #fff;
+      padding: 1rem;
+    }
+    /* cho dễ nhìn */
+    nav a {
+      display: block;
+      margin-bottom: .5rem;
+      text-decoration: none;
+      color: #333;
+    }
+    nav a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <header>Đây là Header</header>
+  <nav>
+    <a href="#">Menu 1</a>
+    <a href="#">Menu 2</a>
+    <a href="#">Menu 3</a>
+  </nav>
+  <main>
+    <h1>Nội dung chính</h1>
+    <p>Đây là khu vực hiển thị nội dung, có thể dài tuỳ ý.</p>
+  </main>
+</body>
+</html>

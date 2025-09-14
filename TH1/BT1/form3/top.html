@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Header</title>
+    <style>
+        body { margin: 0; }
+        .header {
+            display: flex;
+            align-items: center;
+            background: #f5f5f5;
+            padding: 10px 20px 0 20px;
+        }
+        .header img {
+            height: 50px;
+            margin-right: 20px;
+        }
+        .header .title-block {
+            display: flex;
+            flex-direction: column;
+        }
+        .header .title {
+            font-size: 24px;
+            font-weight: bold;
+            color: #1a4ca0;
+        }
+        .header .subtitle {
+            font-size: 18px;
+            color: #1a4ca0;
+        }
+        .navbar {
+            background: #fff;
+            border-bottom: 1px solid #ddd;
+            margin-top: 5px;
+            padding-left: 20px;
+            position: relative;
+        }
+        .navbar ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+        .navbar li {
+            margin-right: 32px;
+            position: relative;
+        }
+        .navbar a {
+            text-decoration: none;
+            color: #1a4ca0;
+            font-weight: bold;
+            font-size: 17px;
+            padding: 16px 0 12px 0;
+            display: inline-block;
+            transition: color 0.2s;
+        }
+        /* Dropdown menu */
+        .navbar .dropdown {
+            position: relative;
+        }
+        .navbar .dropdown-content {
+            display: none;
+            position: absolute;
+            left: 0;
+            top: 100%;
+            min-width: 240px;
+            background: #fff;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            border: 1px solid #e0e0e0;
+            z-index: 99999;
+            padding: 0;
+        }
+        .navbar .dropdown-content a {
+            display: flex;
+            align-items: center;
+            padding: 12px 20px;
+            color: #222;
+            font-size: 16px;
+            font-weight: normal;
+            border-bottom: 1px solid #f0f0f0;
+            background: #fff;
+            transition: color 0.2s, background 0.2s;
+        }
+        .navbar .dropdown-content a:last-child {
+            border-bottom: none;
+        }
+        .navbar .dropdown-content a::before {
+            content: '\25A0';
+            font-size: 8px;
+            color: #222;
+            margin-right: 10px;
+            display: inline-block;
+        }
+        .navbar .dropdown-content a:hover {
+            color: #1a4ca0;
+            background: #e0eaff;
+        }
+        .navbar a:hover {
+            border-bottom: 2.5px solid #1a4ca0;
+        }
+    </style>
+    <script>
+        function openLienHe(e) {
+            e.preventDefault();
+            if (parent && parent.frames && parent.frames['3.3']) {
+                parent.frames['3.3'].location.href = 'lienhe.html';
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="header">
+        <img src="https://dut.udn.vn/portals/_default/skins/dhbk/img/front/logo-k_cntt.png" alt="Logo">
+        <div class="title-block">
+            <div class="title">TRƯỜNG ĐẠI HỌC BÁCH KHOA</div>
+            KHOA CNTT
+        </div>
+    </div>
+    <nav class="navbar">
+        <ul>
+            <li><a href="#">HOME</a></li>
+            <li><a href="#">GIỚI THIỆU</a></li>
+            <li><a href="#">TUYỂN SINH</a></li>
+            <li><a href="#">ĐÀO TẠO</a></li>
+            <li><a href="#">NGHIÊN CỨU KHOA HỌC</a></li>
+            <li><a href="#">HỢP TÁC</a></li>
+            <li><a href="#">SINH VIÊN</a></li>
+            <li><a href="#">CỰU SINH VIÊN</a></li>
+            <li><a href="#" onclick="openLienHe(event)">LIÊN HỆ</a></li>
+        </ul>
+    </nav>
+</body>
+</html>

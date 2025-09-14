@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bai tap 2</title>
+</head>
+<script>
+    function f(){
+        var text = document.f1.t1.value;
+        document.f1.s1.selectedIndex = parseInt(text);
+        
+
+    }
+</script>
+<body onload="document.f1.t1.focus()">
+    <form name="f1" method="" action="">
+        <select name="s1">
+            <option value="0">Index 0</option>
+            <option value="1">Index 1</option>
+            <option value="2">Index 2</option>
+            <option value="3">Index 3</option>
+        </select>
+    <input type="text" name="t1" value="">
+    <input type="button" method="" action="" onClick="f()" value="OK">
+    </form>
+
+</body>
+</html>

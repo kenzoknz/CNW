@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="Unicode-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- iframe nhúng nội dung -->
+   
+    <p>Click the "Try it Yourself" button to see how it works.</p>
+    buttons
+    <button onclick="changeText()">Ấn em đy</button> 
+    <h1 id="demo">My First Heading</h1>
+    <form>
+        <h1>Login</h1>
+        <div> 
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username">
+        </div>
+        <div>
+
+            <label for="password">Password:</label>
+            <input type = "password" id="password" name="password"> 
+        </div>
+        <div>
+
+            <label for="date">Password:</label>
+            <input type = "date" id="date" name="date"> 
+        </div>
+        <br><br>
+        <input type="submit" value="Submit">
+        <input type="reset" value="Reset">
+        <div>
+            <select name = "major">
+                <option value="1">Công nghệ thông tin</option>
+                <option value="2">Khoa học máy tính</option>
+                <option value="3">Khoa học dữ liệu</option>
+                <option value="4">Khoa học máy tính và công nghệ thông tin</option>
+            </select>
+        </div>
+        <div>
+            <input type="radio" name="role" value="Student">Student 
+            <input type="radio" name="role" value="Teacher">Teacher
+        
+        </div>
+    </form>
+    <script>
+        const changeText = () => {
+            document.getElementById("demo").innerHTML = "Goodbye";
+        }
+        // function changeText() {
+    </script>
+    <iframe src="https://yabaiyatsu.github.io/" title="Iframe Example" width="800" height="600"></iframe>
+</body>
+</html>
