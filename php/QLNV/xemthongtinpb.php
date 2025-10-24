@@ -1,27 +1,52 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Danh sách phòng ban</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <?php
-    $conn = new mysqli("localhost", "root", "", "dulieu");
-    if ($conn->connect_error) {
-        die("Kết nối thất bại: " . $conn->connect_error);
-    }
-    $sql = "SELECT * from phongban";
-    $result = $conn->query($sql);
-     echo '<table  border="1" cellspacing="0" cellpadding="10">';
-   echo '<caption>Danh sách truy xuất</caption>';
-   echo '<tr><th>IDPB</th><th>Tên phòng ban</th><th>Mô tả</th><th>Xem nhân viên</th></tr>';
-   while ($row = mysqli_fetch_array($result)) {
-       echo '<tr><td>' . $row['IDPB'] . '</td><td>' . $row['TenPB'] . '</td><td>' . $row['MoTa'] . '</td><td align="center"><a href="xemthongtinNVPB.php?IDPB=' . $row['IDPB'] . '">Xem</a></td></tr>';
-   }
-   echo '</table>';
-   mysqli_free_result($result);
-   $conn->close();
-    ?>
+    <div class="container">
+        <div class="content-wrapper">
+            <a href="index.php" class="back-home">← Quay về trang chính</a>
+            <h1>Danh sách phòng ban</h1>
+
+            <?php
+            $conn = new mysqli("localhost", "root", "", "dulieu");
+            $conn->set_charset("utf8");
+            if ($conn->connect_error) {
+                echo '<div class="message error">Kết nối thất bại: ' . $conn->connect_error . '</div>';
+                exit();
+            }
+
+            $sql = "SELECT * from phongban";
+            $result = $conn->query($sql);
+
+            if ($result && $result->num_rows > 0) {
+                echo '<div class="table-container">';
+                echo '<table>';
+                echo '<caption>Danh sách phòng ban</caption>';
+                echo '<thead><tr><th>Mã phòng ban</th><th>Tên phòng ban</th><th>Mô tả</th><th>Thao tác</th></tr></thead>';
+                echo '<tbody>';
+                while ($row = mysqli_fetch_array($result)) {
+                    echo '<tr>';
+                    echo '<td>' . htmlspecialchars($row['IDPB']) . '</td>';
+                    echo '<td>' . htmlspecialchars($row['TenPB']) . '</td>';
+                    echo '<td>' . htmlspecialchars($row['MoTa']) . '</td>';
+                    echo '<td class="text-center"><a href="xemthongtinNVPB.php?IDPB=' . urlencode($row['IDPB']) . '">Xem</a></td>';
+                    echo '</tr>';
+                }
+                echo '</tbody></table>';
+                echo '</div>';
+                mysqli_free_result($result);
+            } else {
+                echo '<div class="message info">Không có phòng ban nào.</div>';
+            }
+
+            $conn->close();
+            ?>
+        </div>
+    </div>
 </body>
 </html>
