@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thêm sinh viên mới</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <h1>Thêm sinh viên mới</h1>
+    
+    <form action="../controller/C_Student.php?action=add" method="POST" id="addStudentForm">
+        <div class="form-group">
+            <label for="id">ID sinh viên:</label>
+            <input type="text" id="id" name="id" required placeholder="Ví dụ: SV001">
+            <div id="idStatus" style="margin-top: 5px; font-size: 14px;"></div>
+        </div>
+        
+        <div class="form-group">
+            <label for="name">Họ và tên:</label>
+            <input type="text" id="name" name="name" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="age">Tuổi:</label>
+            <input type="number" id="age" name="age" min="16" max="100" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="university">Trường đại học:</label>
+            <input type="text" id="university" name="university" required>
+        </div>
+        
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary" id="submitBtn">Thêm sinh viên</button>
+            <a href="../controller/C_Student.php" class="btn btn-secondary">Quay lại danh sách</a>
+        </div>
+    </form>
+    
+    <script>
+        let checkTimeout;
+        const idInput = document.getElementById('id');
+        const idStatus = document.getElementById('idStatus');
+        const submitBtn = document.getElementById('submitBtn');
+        const form = document.getElementById('addStudentForm');
+        
+        // Kiểm tra ID khi người dùng nhập
+        idInput.addEventListener('input', function() {
+            clearTimeout(checkTimeout);
+            const idValue = this.value.trim();
+            
+            if (idValue.length === 0) {
+                idStatus.innerHTML = '';
+                submitBtn.disabled = false;
+                return;
+            }
+            
+            idStatus.innerHTML = '<span style="color: #6c757d;">Đang kiểm tra...</span>';
+            submitBtn.disabled = true;
+            
+            checkTimeout = setTimeout(() => {
+                checkIdExists(idValue);
+            }, 500);
+        });
+        
+        // Hàm kiểm tra ID tồn tại
+        function checkIdExists(id) {
+            fetch(`../controller/C_Student.php?action=checkid&id=${encodeURIComponent(id)}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.exists) {
+                        idStatus.innerHTML = '<span style="color: #dc3545;">ID này đã tồn tại</span>';
+                        submitBtn.disabled = true;
+                    } else {
+                        idStatus.innerHTML = '<span style="color: #28a745;">ID có thể sử dụng</span>';
+                        submitBtn.disabled = false;
+                    }
+                })
+                .catch(error => {
+                    console.error('Lỗi kiểm tra ID:', error);
+                    idStatus.innerHTML = '<span style="color: #ffc107;">⚠️ Không thể kiểm tra ID</span>';
+                    submitBtn.disabled = false; // Cho phép submit nếu có lỗi network
+                });
+        }
+        
+        // Kiểm tra trước khi submit
+        form.addEventListener('submit', function(e) {
+            const idValue = idInput.value.trim();
+            
+            if (idValue.length === 0) {
+                e.preventDefault();
+                alert('Vui lòng nhập ID sinh viên');
+                return;
+            }
+            
+            // Kiểm tra xem button có bị disable không (ID đã tồn tại)
+            if (submitBtn.disabled) {
+                e.preventDefault();
+                alert('ID sinh viên đã tồn tại. Vui lòng chọn ID khác.');
+                return;
+            }
+            
+        });
+    </script>
+</body>
+</html>

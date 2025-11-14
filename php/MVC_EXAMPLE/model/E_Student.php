@@ -11,5 +11,22 @@
             $this->age = $age;
             $this->university = $university;
         }
+
+        // Getter methods
+        public function getId() {
+            return $this->id;
+        }
+
+        public function getName() {
+            return $this->name;
+        }
+
+        public function getAge() {
+            return $this->age;
+        }
+
+        public function getUniversity() {
+            return $this->university;
+        }
     }
 ?>

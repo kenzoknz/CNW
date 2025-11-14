@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chi tiết sinh viên</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <h1>Chi tiết sinh viên</h1>
+    
+    <?php if (isset($student) && $student != null): ?>
+    <div class="student-info">
+        <div class="info-row">
+            <span class="info-label">ID sinh viên:</span>
+            <span class="info-value"><?php echo htmlspecialchars($student->getId()); ?></span>
+        </div>
+        <div class="info-row">
+            <span class="info-label">Họ và tên:</span>
+            <span class="info-value"><?php echo htmlspecialchars($student->getName()); ?></span>
+        </div>
+        <div class="info-row">
+            <span class="info-label">Tuổi:</span>
+            <span class="info-value"><?php echo htmlspecialchars($student->getAge()); ?> tuổi</span>
+        </div>
+        <div class="info-row">
+            <span class="info-label">Trường đại học:</span>
+            <span class="info-value"><?php echo htmlspecialchars($student->getUniversity()); ?></span>
+        </div>
+    </div>
+    
+    <div class="button-group">
+        <a href="../controller/C_Student.php?action=edit&stid=<?php echo urlencode($student->getId()); ?>" class="btn btn-success">Sửa thông tin</a>
+        <a href="../controller/C_Student.php?action=delete&stid=<?php echo urlencode($student->getId()); ?>" class="btn btn-danger">Xóa sinh viên</a>
+        <a href="../controller/C_Student.php" class="btn btn-secondary">Danh sách</a>
+        <a href="../index.php" class="btn btn-secondary">Trang chủ</a>
+    </div>
+    
+    <?php else: ?>
+    <div class="alert alert-warning">
+        <p>Không tìm thấy thông tin sinh viên.</p>
+    </div>
+    <div class="button-group">
+        <a href="../controller/C_Student.php" class="btn btn-secondary">Quay lại danh sách</a>
+    </div>
+    <?php endif; ?>
+</body>
+</html>

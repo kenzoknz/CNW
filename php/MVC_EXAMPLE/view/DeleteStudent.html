@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xóa sinh viên</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <h1 class="delete-title">⚠️ Xác nhận xóa sinh viên</h1>
+    
+    <?php if (isset($student) && $student != null): ?>
+    
+    <div class="warning">
+        <strong>Cảnh báo:</strong> Bạn sắp xóa sinh viên khỏi hệ thống. Hành động này không thể hoàn tác!
+    </div>
+    
+    <div class="student-info">
+        <h3>Thông tin sinh viên sẽ bị xóa:</h3>
+        <div class="info-row">
+            <span class="info-label">ID sinh viên:</span>
+            <span class="info-value"><?php echo htmlspecialchars($student->getId()); ?></span>
+        </div>
+        <div class="info-row">
+            <span class="info-label">Họ và tên:</span>
+            <span class="info-value"><?php echo htmlspecialchars($student->getName()); ?></span>
+        </div>
+        <div class="info-row">
+            <span class="info-label">Tuổi:</span>
+            <span class="info-value"><?php echo htmlspecialchars($student->getAge()); ?> tuổi</span>
+        </div>
+        <div class="info-row">
+            <span class="info-label">Trường đại học:</span>
+            <span class="info-value"><?php echo htmlspecialchars($student->getUniversity()); ?></span>
+        </div>
+    </div>
+    
+    <div class="button-group">
+        <a href="../controller/C_Student.php?action=confirmdelete&stid=<?php echo urlencode($student->getId()); ?>" 
+           class="btn btn-danger">
+            Xác nhận xóa
+        </a>
+        <a href="../controller/C_Student.php?stid=<?php echo urlencode($student->getId()); ?>" 
+           class="btn btn-secondary">
+            Hủy bỏ
+        </a>
+    </div>
+    
+    <?php else: ?>
+    <div class="warning">
+        <p>Không tìm thấy thông tin sinh viên.</p>
+    </div>
+    <div class="button-group">
+        <a href="../controller/C_Student.php" class="btn btn-secondary">Quay lại danh sách</a>
+    </div>
+    <?php endif; ?>
+</body>
+</html>

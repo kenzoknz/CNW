@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sửa thông tin sinh viên</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <h1>Sửa thông tin sinh viên</h1>
+    
+    <?php if (isset($student) && $student != null): ?>
+    <form action="../controller/C_Student.php?action=edit" method="POST">
+        <div class="form-group">
+            <label for="id">ID sinh viên:</label>
+            <input type="text" id="id" name="id" value="<?php echo htmlspecialchars($student->getId()); ?>" readonly>
+        </div>
+        
+        <div class="form-group">
+            <label for="name">Họ và tên:</label>
+            <input type="text" id="name" name="name" value="<?php echo htmlspecialchars($student->getName()); ?>" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="age">Tuổi:</label>
+            <input type="number" id="age" name="age" value="<?php echo htmlspecialchars($student->getAge()); ?>" min="16" max="100" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="university">Trường đại học:</label>
+            <input type="text" id="university" name="university" value="<?php echo htmlspecialchars($student->getUniversity()); ?>" required>
+        </div>
+        
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Cập nhật</button>
+            <a href="../controller/C_Student.php?stid=<?php echo urlencode($student->getId()); ?>" class="btn btn-secondary">Hủy</a>
+            <a href="../controller/C_Student.php" class="btn btn-secondary">Danh sách</a>
+        </div>
+    </form>
+    <?php else: ?>
+    <p>Không tìm thấy thông tin sinh viên.</p>
+    <a href="../controller/C_Student.php" class="btn btn-secondary">Quay lại danh sách</a>
+    <?php endif; ?>
+</body>
+</html>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tìm kiếm sinh viên</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <h1>Tìm kiếm sinh viên</h1>
+    
+    <form action="../controller/C_Student.php?action=search" method="POST">
+        <div class="form-group">
+            <label for="searchField">Từ khóa tìm kiếm:</label>
+            <input type="text" id="searchField" name="searchField" placeholder="Nhập từ khóa..." required>
+        </div>
+        
+        <div class="form-group">
+            <label for="searchBy">Tìm kiếm theo:</label>
+            <select id="searchBy" name="searchBy" required onchange="updatePlaceholder()">
+                <option value="id">ID sinh viên</option>
+                <option value="name">Họ và tên</option>
+                <option value="age">Tuổi</option>
+                <option value="university">Trường đại học</option>
+            </select>
+        </div>
+        
+        <script>
+            function updatePlaceholder() {
+                var searchBy = document.getElementById('searchBy').value;
+                var searchField = document.getElementById('searchField');
+                
+                switch(searchBy) {
+                    case 'id':
+                        searchField.placeholder = 'Nhập ID sinh viên...';
+                        searchField.type = 'text';
+                        break;
+                    case 'name':
+                        searchField.placeholder = 'Nhập họ và tên...';
+                        searchField.type = 'text';
+                        break;
+                    case 'age':
+                        searchField.placeholder = 'Nhập tuổi (ví dụ: 20)';
+                        searchField.type = 'number';
+                        searchField.min = '16';
+                        searchField.max = '100';
+                        break;
+                    case 'university':
+                        searchField.placeholder = 'Nhập tên trường đại học...';
+                        searchField.type = 'text';
+                        break;
+                    default:
+                        searchField.placeholder = 'Nhập từ khóa...';
+                        searchField.type = 'text';
+                }
+            }
+            
+            // Gọi hàm khi trang load
+            window.onload = function() {
+                updatePlaceholder();
+            };
+        </script>
+        
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Tìm kiếm</button>
+            <a href="../controller/C_Student.php" class="btn btn-secondary">Quay lại danh sách</a>
+            <a href="../index.php" class="btn btn-secondary">Trang chủ</a>
+        </div>
+    </form>
+
+    <?php if (isset($searchResults) && is_array($searchResults)): ?>
+        <h2>Kết quả tìm kiếm</h2>
+        <?php if (count($searchResults) > 0): ?>
+            <p>Tìm thấy <?php echo count($searchResults); ?> kết quả cho từ khóa: <strong><?php echo htmlspecialchars($searchKeyword); ?></strong> (tìm theo: <?php echo htmlspecialchars($searchCriteria); ?>)</p>
+            <table>
+                <tr>
+                    <th>ID</th>
+                    <th>Họ và tên</th>
+                    <th>Tuổi</th>
+                    <th>Trường đại học</th>
+                    <th>Chi tiết</th>
+                </tr>
+                <?php foreach ($searchResults as $student): ?>
+                    <tr>
+                        <td><?php echo htmlspecialchars($student->getId()); ?></td>
+                        <td><?php echo htmlspecialchars($student->getName()); ?></td>
+                        <td><?php echo htmlspecialchars($student->getAge()); ?></td>
+                        <td><?php echo htmlspecialchars($student->getUniversity()); ?></td>
+                        <td><a href="../controller/C_Student.php?stid=<?php echo urlencode($student->getId()); ?>">Xem chi tiết</a></td>
+                    </tr>
+                <?php endforeach; ?>
+            </table>
+        <?php else: ?>
+            <div class="no-results">
+                <p>Không tìm thấy kết quả nào cho từ khóa: <strong><?php echo htmlspecialchars($searchKeyword); ?></strong></p>
+            </div>
+        <?php endif; ?>
+    <?php endif; ?>
+</body>
+</html>
