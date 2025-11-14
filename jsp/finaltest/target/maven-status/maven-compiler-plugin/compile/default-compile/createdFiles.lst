@@ -1,0 +1,4 @@
+com\example\controller\StudentController.class
+com\example\model\bean\Student.class
+com\example\model\bo\StudentBO.class
+com\example\model\dao\StudentDAO.class
